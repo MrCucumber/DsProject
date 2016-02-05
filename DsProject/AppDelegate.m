@@ -7,8 +7,20 @@
 //
 
 #import "AppDelegate.h"
+#import "AppDelegate+TabBar.h"
+
+//#import "PersonalViewController.h"
+#import "ActivityViewController.h"
+#import "NoLoginLeadViewController.h"
+
+
 
 @interface AppDelegate ()
+
+@property (nonatomic, strong) ActivityViewController *mainVC;
+@property (nonatomic, strong) NoLoginLeadViewController *loginVC;
+@property (nonatomic, strong) NSString *strState;
+
 
 @end
 
@@ -17,8 +29,57 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(loginStateChanged:)
+                                                 name:@"kNotificationLoginStateChanged"
+                                               object:nil];
+    self.strState = @"0";
+    if ([self.strState isEqualToString:@"1"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"kNotificationLoginStateChanged" object:@YES];
+    } else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"kNotificationLoginStateChanged" object:@NO];
+    }
+    
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
+
+- (void)loginStateChanged:(NSNotification *)notification {
+    UINavigationController *navigationVC;
+    BOOL isLogin = [notification.object boolValue];
+    
+    if (isLogin) {
+        
+        navigationVC = [self setupCustomTabBarController]; // 设置根视图
+        
+    } else {
+        navigationVC = [[UINavigationController alloc] initWithRootViewController:self.loginVC];
+        //
+    }
+    
+    self.window.rootViewController = navigationVC;
+}
+
+- (ActivityViewController *)mainVC {
+    if (!_mainVC) {
+        _mainVC = [[ActivityViewController alloc] init];
+    }
+    
+    return _mainVC;
+}
+
+- (NoLoginLeadViewController *)loginVC {
+    if (!_loginVC) {
+        _loginVC = [[NoLoginLeadViewController alloc] init];
+    }
+    
+    return _loginVC;
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
