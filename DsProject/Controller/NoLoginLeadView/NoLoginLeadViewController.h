@@ -9,7 +9,7 @@
 #import "BaseViewController.h"
 // 获取屏幕宽度
 #define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
- 
+
 // 获取屏幕高度
 #define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
 
