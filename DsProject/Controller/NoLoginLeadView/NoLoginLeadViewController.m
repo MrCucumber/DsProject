@@ -32,7 +32,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationItem.title = @"三联画1";
+    self.navigationItem.title = @"三联画";
     [self createLeadView];// 够贱一个未登录引导页面
 }
 // 够贱一个未登录引导页面
