@@ -30,6 +30,8 @@
 
 @property (nonatomic, strong) UITextField *textfieldComment;
 
+@property (nonatomic, strong) NSString *strFollowState;
+
 
 @end
 
@@ -37,6 +39,9 @@
 
 #pragma mark - 生命周期
 
+- (void)viewWillAppear:(BOOL)animated {
+    self.strFollowState = @"0";
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -77,9 +82,10 @@
         self.imageViewPicture.backgroundColor = [UIColor redColor];
         [self.viewTop addSubview:self.imageViewPicture];
         
-        self.viewTop.frame = CGRectMake(0, 0, SCREEN_WIDTH, 150 + (row + 1)*(rowInterval+buttonHeight));
+        self.viewTop.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.textViewDynamicDetail.contentSize.height+ 64 + (row + 1)*(rowInterval+buttonHeight));
     }
     [self.scrollView addSubview:self.tableView];
+    
     self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, self.tableView.bottom);
 }
 
@@ -163,6 +169,7 @@
         buttonSend.backgroundColor = [UIColor colorWithRed:27.0/255.0 green:169.0/255.0 blue:143.0/255.0 alpha:1];
         buttonSend.titleLabel.font = [UIFont systemFontOfSize:14.0f];
         [buttonSend setTitle:@"发送" forState:UIControlStateNormal];
+        [buttonSend addTarget:self action:@selector(sendAct) forControlEvents:UIControlEventTouchUpInside];
         [buttonSend setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [buttonSend.layer setCornerRadius:3];
         [viewComment addSubview:buttonSend];
@@ -188,6 +195,26 @@
     return cell;
 }
 
+#pragma mark - 私有方法
+- (void)followAct {
+    if ([self.strFollowState isEqualToString:@"0"]) {
+        [self.buttonFollow setTitle:@"已关注" forState:UIControlStateNormal];
+        self.buttonFollow.backgroundColor = [UIColor lightGrayColor];
+        self.strFollowState = @"1";
+        [self showHint:@"关注成功"];
+    }else if([self.strFollowState isEqualToString:@"1"]) {
+        [self.buttonFollow setTitle:@"关注" forState:UIControlStateNormal];
+        self.buttonFollow.backgroundColor = [UIColor colorWithRed:27.0/255.0 green:169.0/255.0 blue:143.0/255.0 alpha:1];
+        self.strFollowState = @"0";
+        [self showHint:@"已取消关注"];
+    }
+}
+
+//- (void)sendAct {
+//    if (self.textfieldComment.text == nil ||) {
+//        <#statements#>
+//    }
+//}
 #pragma mark -懒加载
 - (UIScrollView *)scrollView {
     if (!_scrollView) {
@@ -228,8 +255,9 @@
         _buttonFollow = [UIButton buttonWithType:UIButtonTypeCustom];
         _buttonFollow.frame = CGRectMake(self.labelName.right + 6, 15, 40, 20);
         _buttonFollow.backgroundColor = [UIColor colorWithRed:27.0/255.0 green:169.0/255.0 blue:143.0/255.0 alpha:1];
-        _buttonFollow.titleLabel.font = [UIFont systemFontOfSize:14.0f];
+        _buttonFollow.titleLabel.font = [UIFont systemFontOfSize:13.0f];
         [_buttonFollow setTitle:@"关注" forState:UIControlStateNormal];
+        [_buttonFollow addTarget:self action:@selector(followAct) forControlEvents:UIControlEventTouchUpInside];
         [_buttonFollow setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_buttonFollow.layer setCornerRadius:3];
         
@@ -259,9 +287,10 @@
 
 - (UILabel *)labelTime {
     if (!_labelTime) {
-        _labelTime = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 130, self.labelHotTitle.bottom, 110, 20)];
+        _labelTime = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 115, self.labelHotTitle.bottom, 110, 20)];
         _labelTime.text = @"2015-12-23 10:50";
         _labelTime.font = [UIFont systemFontOfSize:13.0f];
+        _labelTime.textAlignment = NSTextAlignmentRight;
         _labelTime.textColor = [UIColor lightGrayColor];
     }
     return _labelTime;
@@ -269,9 +298,11 @@
 
 - (UITextView *)textViewDynamicDetail {
     if (!_textViewDynamicDetail) {
-        _textViewDynamicDetail = [[UITextView alloc]initWithFrame:CGRectMake(16, self.labelName.bottom + 14, SCREEN_WIDTH - 32, 90)];
+        _textViewDynamicDetail = [[UITextView alloc]initWithFrame:CGRectMake(16, self.labelName.bottom + 14, SCREEN_WIDTH - 32, 0)];
         _textViewDynamicDetail.text = @"        上体微向前倾，两腿微弯，同时左脚利用右脚掌的灯里跃出约85里面，前脚掌先着地，身体重心前移，右脚照此法动作；上体保持正直，两臂前后自然摆动，向前败笔是大臂略直";
         _textViewDynamicDetail.font = [UIFont systemFontOfSize:15.0f];
+        _textViewDynamicDetail.frame = CGRectMake(16, self.labelName.bottom + 14, SCREEN_WIDTH - 32, _textViewDynamicDetail.contentSize.height);
+        _textViewDynamicDetail.editable = NO;
     }
     return _textViewDynamicDetail;
 }

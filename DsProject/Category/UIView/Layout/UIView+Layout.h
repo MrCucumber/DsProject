@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+#define DEVICE_IS_IPHONE4 ([[UIScreen mainScreen] bounds].size.height == 480)
+#define DEVICE_IS_IPHONE5 ([[UIScreen mainScreen] bounds].size.height == 568)
+
+
 @interface UIView (Layout)
 
 /**

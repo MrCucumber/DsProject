@@ -203,6 +203,7 @@
     }
 }
 
+
 // 判断设备是否有摄像头
 - (BOOL)isCameraAvailable{
     return [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
@@ -378,7 +379,7 @@
             [self getFromPhoto];
         }];
         UIAlertAction *cameraAlertAction = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [self getFromPhoto];
+            [self getFromCamera];
         }];
         
         UIAlertAction *cancelAlertAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDestructive handler:nil];

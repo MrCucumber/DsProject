@@ -1174,7 +1174,7 @@
 				TargetAttributes = {
 					C90C84631C5131DC0000053D = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = VM3RG562P7;
+						DevelopmentTeam = H3LZM89AFD;
 					};
 					C90C847C1C5131DC0000053D = {
 						CreatedOnToolsVersion = 7.2;
@@ -1428,8 +1428,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: hongdong huang (FMD4R28363)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: hongdong huang (FMD4R28363)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1451,7 +1451,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "a8a6b7bb-1877-4063-a35f-e6e70e30b7db";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1473,8 +1473,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: hongdong huang (FMD4R28363)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: hongdong huang (FMD4R28363)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1489,7 +1489,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "a8a6b7bb-1877-4063-a35f-e6e70e30b7db";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1507,15 +1507,16 @@
 					"$(PROJECT_DIR)/DsProject/3rdparty/shareSDK",
 				);
 				INFOPLIST_FILE = DsProject/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DsProject/3rdparty/shareSDK/extends/SinaWeiboSDK",
 					"$(PROJECT_DIR)/DsProject/3rdparty/shareSDK/extends/WeChatSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = LAWHertz.DsProject;
+				PRODUCT_BUNDLE_IDENTIFIER = LAWHertz.DsProjectText;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a8a6b7bb-1877-4063-a35f-e6e70e30b7db";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -1531,15 +1532,16 @@
 					"$(PROJECT_DIR)/DsProject/3rdparty/shareSDK",
 				);
 				INFOPLIST_FILE = DsProject/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DsProject/3rdparty/shareSDK/extends/SinaWeiboSDK",
 					"$(PROJECT_DIR)/DsProject/3rdparty/shareSDK/extends/WeChatSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = LAWHertz.DsProject;
+				PRODUCT_BUNDLE_IDENTIFIER = LAWHertz.DsProjectText;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a8a6b7bb-1877-4063-a35f-e6e70e30b7db";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

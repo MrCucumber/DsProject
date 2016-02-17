@@ -9,7 +9,7 @@
 
 #import "ForgetPasswordViewController.h"
 
-@interface ForgetPasswordViewController ()
+@interface ForgetPasswordViewController ()<UITextFieldDelegate>
 @property (nonatomic, strong)UIButton *buttonYzm;               // 验证码按钮
 @property (nonatomic, strong)UIButton *buttonSumbit;            // 提交重设密码
 @property (nonatomic, strong)UIView *viewAgnPassword;           // view再次输入密码
@@ -101,6 +101,11 @@
     [self.scrollView addSubview:self.buttonSumbit];           // button 提交按钮
     
     self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, self.buttonSumbit.bottom + 30);
+    
+    UITapGestureRecognizer *taper = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapsion)];
+    taper.numberOfTouchesRequired=1;
+    [self.scrollView addGestureRecognizer:taper];
+
 }
 
 #pragma mark - 私有方法
@@ -248,6 +253,7 @@
     if (!_textFieldPhone) {
         _textFieldPhone = [[UITextField alloc]initWithFrame:CGRectMake(self.imgPhone.right + 10, 2, self.viewAgnPassword.width - 40, 32)];
         _textFieldPhone.placeholder = @"请输入有效号码";
+        _textFieldPhone.delegate = self;
         [_textFieldPhone setValue:[UIColor colorWithRed:83.0/255 green:89.0/255.0 blue:104.0/255.0 alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
         [_textFieldPhone setValue:[UIFont boldSystemFontOfSize:15] forKeyPath:@"_placeholderLabel.font"];
         
@@ -260,6 +266,7 @@
         _textFieldPassword = [[UITextField alloc]initWithFrame:CGRectMake(self.imgPassword.right + 10, 2, self.viewAgnPassword.width - 40, 32)];
         _textFieldPassword.placeholder = @"密码6到12位";
         _textFieldPassword.secureTextEntry = YES;
+        _textFieldPassword.delegate = self;
         [_textFieldPassword setValue:[UIColor colorWithRed:83.0/255 green:89.0/255.0 blue:104.0/255.0 alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
         [_textFieldPassword setValue:[UIFont boldSystemFontOfSize:15] forKeyPath:@"_placeholderLabel.font"];
         
@@ -273,6 +280,7 @@
         _textFieldAgnPassword = [[UITextField alloc]initWithFrame:CGRectMake(self.imgAgnPassword.right + 10 , 2, self.viewAgnPassword.width - 40, 32)];
         _textFieldAgnPassword.placeholder = @"确认密码";
         _textFieldAgnPassword.secureTextEntry = YES;
+        _textFieldAgnPassword.delegate = self;
         [_textFieldAgnPassword setValue:[UIColor colorWithRed:83.0/255 green:89.0/255.0 blue:104.0/255.0 alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
         [_textFieldAgnPassword setValue:[UIFont boldSystemFontOfSize:15] forKeyPath:@"_placeholderLabel.font"];
         
@@ -284,6 +292,7 @@
     if (!_textFieldYzm) {
         _textFieldYzm = [[UITextField alloc]initWithFrame:CGRectMake(self.imgYzm.right + 10, 2, self.viewYzm.width - 40, 32)];
         _textFieldYzm.placeholder = @"验证码";
+        _textFieldYzm.delegate = self;
         [_textFieldYzm setValue:[UIColor colorWithRed:83.0/255 green:89.0/255.0 blue:104.0/255.0 alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
         [_textFieldYzm setValue:[UIFont boldSystemFontOfSize:15] forKeyPath:@"_placeholderLabel.font"];
         
@@ -324,4 +333,40 @@
     }
     return _scrollView;
 }
+
+// 开始编辑
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    if (DEVICE_IS_IPHONE4) {
+        self.view.frame = CGRectMake(0, self.view.frame.origin.y - 150, self.view.frame.size.width, self.view.frame.size.height);
+    }else if (DEVICE_IS_IPHONE5) {
+        self.view.frame = CGRectMake(0, self.view.frame.origin.y - 150, self.view.frame.size.width, self.view.frame.size.height);
+    }else {
+        return;
+    }
+}
+
+// 结束编辑
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+}
+
+// 键盘收回
+- (void)tapsion {
+    [self keyboardShouldReturn];
+    
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
+    if (theTextField == self.textFieldPhone) {
+        [theTextField resignFirstResponder];
+    }else if (theTextField == self.textFieldPassword) {
+        [theTextField resignFirstResponder];
+    }else if (theTextField == self.textFieldAgnPassword) {
+        [theTextField resignFirstResponder];
+    }else if (theTextField == self.textFieldYzm) {
+        [theTextField resignFirstResponder];
+    }
+    return YES;
+}
+
 @end

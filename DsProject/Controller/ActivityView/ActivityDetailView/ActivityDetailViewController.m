@@ -128,7 +128,13 @@
     [self.scrollView addSubview:self.buttonAdd];
     [self.scrollView addSubview:self.labelJoinNum];
     [self.scrollView addSubview:self.labelPeopelNum];
-    
+
+    self.viewActivityIntroduce.frame = CGRectMake(0, self.viewMiddle.bottom + 20, SCREEN_WIDTH, 30 + self.textView.contentSize.height+10);
+    self.buttonAdd.frame = CGRectMake(10, self.viewActivityIntroduce.bottom + 10, SCREEN_WIDTH - 20, 38);
+    self.labelJoinNum.frame = CGRectMake(0, self.buttonAdd.bottom + 10, SCREEN_WIDTH, 20);
+    self.labelPeopelNum.frame = CGRectMake(0, self.labelJoinNum.bottom + 8, SCREEN_WIDTH, 20);
+
+
     self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, self.labelPeopelNum.bottom + 30);
 }
 
@@ -378,6 +384,7 @@
         _textView = [[UITextView alloc]initWithFrame:CGRectMake(15, 35, SCREEN_WIDTH - 30, 95)];
         _textView.text = @"        跑步锻炼是人们常采用的一种身体锻炼方式，这主要是因为跑步技术要求简单，无需特殊的场地、服装或器械。无论在运动场上或在马路上，甚至在田野间、树林中均可以跑步锻炼，无需特殊的场地、服装或器械。无论在运动场上或在马路上，甚至在田野间、树林中均可以跑步锻炼";
         _textView.font = [UIFont systemFontOfSize:15.0f];
+        _textView.frame = CGRectMake(15, 35, SCREEN_WIDTH - 30, _textView.contentSize.height);
         _textView.editable = YES;
         _textView.bounces = NO;
     }

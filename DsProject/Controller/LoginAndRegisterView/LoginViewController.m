@@ -9,12 +9,13 @@
 #import "LoginViewController.h"
 #import "ForgetPasswordViewController.h"
 
-@interface LoginViewController ()
+#define NUMBERS @"0123456789"
+@interface LoginViewController ()<UITextFieldDelegate>
 
 @property (nonatomic, strong) UITextField *textFieldPhone; // 手机账户textfield
 @property (nonatomic, strong) UITextField *textFieldPassword; // 密码textfield
-@property (nonatomic, strong) UITextField *textFieldYzm; // 验证码textfield
-@property (nonatomic, strong) UILabel *labelYzm; // 验证码label
+//@property (nonatomic, strong) UITextField *textFieldYzm; // 验证码textfield
+//@property (nonatomic, strong) UILabel *labelYzm; // 验证码label
 @property (nonatomic, strong) NSString *strState;
 
 @property (nonatomic, strong) UIView *viewPassword;
@@ -43,6 +44,7 @@
 - (void)creatLoginView {
     
     self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
+    self.scrollView.bounces = NO;
     [self.view addSubview:self.scrollView];
     
     //logoImage
@@ -101,6 +103,7 @@
     
     self.textFieldPhone = [[UITextField alloc]initWithFrame:CGRectMake(30, 2, SCREEN_WIDTH - 63 - 63 - 30, 32)];
     self.textFieldPhone.placeholder = @"手机号";
+    self.textFieldPhone.delegate = self;
     [self.textFieldPhone setValue:[UIColor colorWithRed:83.0/255 green:89.0/255.0 blue:104.0/255.0 alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
     [self.textFieldPhone setValue:[UIFont boldSystemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
     [viewPhone addSubview:self.textFieldPhone];
@@ -108,14 +111,15 @@
     
     self.textFieldPassword = [[UITextField alloc]initWithFrame:CGRectMake(30, 2, SCREEN_WIDTH - 63 - 63 - 30, 32)];
     self.textFieldPassword.placeholder = @"密 码";
+    self.textFieldPassword.delegate = self;
     self.textFieldPassword.secureTextEntry = YES;
     [self.textFieldPassword setValue:[UIColor colorWithRed:83.0/255 green:89.0/255.0 blue:104.0/255.0 alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
     [self.textFieldPassword setValue:[UIFont boldSystemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
     [self.viewPassword addSubview:self.textFieldPassword];
     
-    self.textFieldYzm = [[UITextField alloc]initWithFrame:CGRectMake(30, 2, (SCREEN_WIDTH - 63 -63)/4*3 - 40, 32)];
-    self.textFieldYzm.placeholder = @"验证码";
-    [self.textFieldYzm setValue:[UIColor colorWithRed:83.0/255 green:89.0/255.0 blue:104.0/255.0 alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
+//    self.textFieldYzm = [[UITextField alloc]initWithFrame:CGRectMake(30, 2, (SCREEN_WIDTH - 63 -63)/4*3 - 40, 32)];
+//    self.textFieldYzm.placeholder = @"验证码";
+//    [self.textFieldYzm setValue:[UIColor colorWithRed:83.0/255 green:89.0/255.0 blue:104.0/255.0 alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
 //    [self.textFieldYzm setValue:[UIFont boldSystemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
 //    [viewYzm addSubview:self.textFieldYzm];
     
@@ -162,6 +166,12 @@
     
     
     self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, buttonForget.bottom + 30);
+    
+    
+    UITapGestureRecognizer *taper = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapsion)];
+    taper.numberOfTouchesRequired=1;
+    [self.scrollView addGestureRecognizer:taper];
+
     
     
 }
@@ -220,10 +230,6 @@
  *  如果账户不正确，提示。否则继续检查密码
  *
  */
-- (void)loginPersonal {
-    
-}
-
 //同意协议点击事件
 - (void)agreeAct:(UIButton *)sender{
     
@@ -232,6 +238,7 @@
         //            self.imagState.image = [UIImage imageNamed:@"F3"];
         stateA = @"1";
         sender.selected = YES;
+        
     }else if([stateA isEqualToString:@"1"]){
         
         //            self.imagState.image = [UIImage imageNamed:@"F1"];
@@ -243,6 +250,37 @@
     self.strState = stateA;
     //    LOG(@"----%@",self.strState);
     
+}
+
+// 开始编辑
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    if (DEVICE_IS_IPHONE4) {
+        self.view.frame = CGRectMake(0, self.view.frame.origin.y - 150, self.view.frame.size.width, self.view.frame.size.height);
+    }else if (DEVICE_IS_IPHONE5) {
+        self.view.frame = CGRectMake(0, self.view.frame.origin.y - 150, self.view.frame.size.width, self.view.frame.size.height);
+    }else {
+        return;
+    }
+}
+
+// 结束编辑
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+}
+
+// 键盘收回
+- (void)tapsion {
+    [self keyboardShouldReturn];
+    
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
+    if (theTextField == self.textFieldPhone) {
+        [theTextField resignFirstResponder];
+    }else if (theTextField == self.textFieldPassword) {
+        [theTextField resignFirstResponder];
+    }
+    return YES;
 }
 
 @end

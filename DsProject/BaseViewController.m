@@ -29,7 +29,7 @@
     [self setupBaseViewController]; // 统一设置
     
     // 特效导航栏特效
-    [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init] forBarPosition:UIBarPositionBottom barMetrics:UIBarMetricsDefault];
     [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
 }
 
@@ -44,9 +44,11 @@
     
     // 设置背景颜色
     self.view.backgroundColor = [UIColor colorWithRed:33.0/255.0 green:35.0/255.0 blue:47.0/255.0 alpha:1];
+//    self.view.backgroundColor = [UIColor colorWithRed:39.0/255.0 green:50.0/255.0 blue:61.0/255.0 alpha:1];
+
     
     // 导航栏背景色
-//    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:33.0/255.0 green:35.0/255.0 blue:47.0/255.0 alpha:1];
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:15.0/255.0 green:17.0/255.0 blue:31.0/255.0 alpha:1];
     
 
 

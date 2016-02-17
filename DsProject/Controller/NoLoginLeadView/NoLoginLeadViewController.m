@@ -47,15 +47,15 @@
         //设置滑动图片
         UIImageView *imageView =[[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH * i, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
         NSString *name =[NSString stringWithFormat:@"00%d.jpg",i];
+        imageView.contentMode = UIViewContentModeScaleAspectFit
+        ;
         imageView.image =[UIImage imageNamed:name];
         [self.scrollview addSubview:imageView];
-        
-        UIImageView *imageLogo = [[UIImageView alloc]initWithFrame:CGRectMake((SCREEN_WIDTH/2 - 50)+ i * SCREEN_WIDTH, 121 , 100, 150)];
-        imageLogo.image = [UIImage imageNamed:@"icon_log"];
-        [self.scrollview addSubview:imageLogo];
-
-
     }
+    
+    UIImageView *imageLogo = [[UIImageView alloc]initWithFrame:CGRectMake((SCREEN_WIDTH/2 - 50), 121 , 100, 150)];
+    imageLogo.image = [UIImage imageNamed:@"icon_log"];
+    [self.scrollview addSubview:imageLogo];
     
     self.scrollview.pagingEnabled =YES;
     self.scrollview.showsHorizontalScrollIndicator =NO;
